@@ -1,0 +1,213 @@
+/* =========================================================
+   PROFIT PLINKO — GAME STYLES (AlignedFX)
+   ========================================================= */
+
+/* Inter is loaded with a <link> in index.html (faster than @import). */
+
+:root {
+  --moss-green: #919B81;
+  --reseda-green: #697867;
+  --brown-sugar: #C4826C;
+  --eggshell: #F0E8D7;
+  --gold-accent: #D4AF37;
+
+  --plinko-bg: #2b332b;
+  --plinko-ui-bg: rgba(43, 51, 43, 0.85);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #1b1f1b;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+#plinko-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--plinko-bg);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: crosshair;
+}
+
+/* Only block page panning while a game is running, so a phone visitor can
+   still scroll the host page past the embed when the menu is showing. */
+#plinko-wrapper.is-playing {
+  touch-action: none;
+}
+
+#plinko-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#bgCanvas { z-index: 1; }
+#gameCanvas { z-index: 2; }
+
+/* ========== HUD ========== */
+
+.plinko-hud-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 10px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.plinko-hud-row-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.plinko-stat-box {
+  background: var(--plinko-ui-bg);
+  border: 1px solid var(--moss-green);
+  padding: 8px 4px;
+  border-radius: 10px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.plinko-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--moss-green);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.plinko-big-text {
+  font-size: 1.1rem;
+  color: var(--eggshell);
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Combo multiplier badge next to the score */
+.plinko-mult {
+  margin-left: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--gold-accent);
+  vertical-align: middle;
+}
+
+.plinko-mult[hidden] { display: none; }
+
+/* Moved out of inline HTML attributes */
+#box-trades .plinko-label { color: #d9dcd8; }
+#box-gold { border-color: var(--gold-accent); }
+#box-gold .plinko-label { color: var(--gold-accent); }
+#box-gold .plinko-big-text { color: var(--gold-accent); }
+
+/* ========== MENU ========== */
+
+#plinko-menu-layer {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 51, 43, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.3s;
+  padding: 1rem;
+}
+
+.plinko-menu-content {
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.plinko-menu-content h1 {
+  color: var(--gold-accent);
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: 0 0 15px;
+}
+
+.plinko-menu-content p {
+  color: var(--eggshell);
+  font-size: 1.1rem;
+  margin: 0 0 30px;
+}
+
+.plinko-btn {
+  font-family: inherit;
+  background: var(--gold-accent);
+  /* Dark text on gold for readable contrast. */
+  color: #2b332b;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.plinko-btn:hover {
+  transform: translateY(-2px);
+  background: #e5bd3d;
+}
+
+.plinko-btn:focus-visible {
+  outline: 3px solid var(--eggshell);
+  outline-offset: 3px;
+}
+
+/* ========== FLASH ========== */
+
+#flash-overlay {
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+  transition: opacity 0.1s;
+}
+
+/* ========== SMALL SCREENS ========== */
+
+@media (max-width: 420px) {
+  .plinko-hud-container { padding: 10px 8px; }
+  .plinko-hud-row-header { gap: 4px; }
+  .plinko-stat-box { padding: 5px 2px; border-radius: 8px; }
+  .plinko-label { font-size: 0.55rem; letter-spacing: 0.2px; }
+  .plinko-big-text { font-size: 0.95rem; }
+  .plinko-mult { margin-left: 3px; font-size: 0.65rem; }
+  .plinko-menu-content h1 { font-size: 1.6rem; }
+  .plinko-menu-content p { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plinko-btn:hover { transform: none; }
+}

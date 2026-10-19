@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+
+<!-- This file is embedded in an iframe on alignedfx.com/profit-plinko.
+     noindex keeps the bare Netlify URL out of search results so it can't
+     compete with the real page. -->
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Profit Plinko</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+<link rel="stylesheet" href="style.css?v=8" />
+</head>
+
+<body>
+
+<div id="plinko-wrapper">
+  <div id="flash-overlay"></div>
+
+  <div id="plinko-menu-layer">
+    <div class="plinko-menu-content">
+      <h1 id="plinko-menu-title">Ready to Begin?</h1>
+      <p id="plinko-menu-desc">Drop each Trade, clear the Gold Chips, and let probability play out.</p>
+      <button id="plinko-start-btn" class="plinko-btn" type="button">Begin Round</button>
+    </div>
+  </div>
+
+  <!-- BACKGROUND & GAME CANVASES -->
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="gameCanvas" aria-label="Profit Plinko game board" role="img"></canvas>
+
+  <!-- HUD -->
+  <div class="plinko-hud-container">
+    <div class="plinko-hud-row-header">
+      <div class="plinko-stat-box">
+        <div class="plinko-label">Portfolio</div>
+        <div class="plinko-big-text">$<span id="ui-score">0</span><span id="ui-mult" class="plinko-mult" hidden></span></div>
+      </div>
+
+      <div class="plinko-stat-box" id="box-trades">
+        <div class="plinko-label">Trades left</div>
+        <div class="plinko-big-text"><span id="ui-balls">10</span></div>
+      </div>
+
+      <div class="plinko-stat-box" id="box-gold">
+        <div class="plinko-label">Gold left</div>
+        <div class="plinko-big-text"><span id="ui-pegs">0</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="game.js?v=8"></script>
+
+</body>
+</html>
